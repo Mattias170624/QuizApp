@@ -13,15 +13,20 @@ class TodoList extends StatelessWidget {
         ? ListView.builder(
             itemCount: list.length,
             itemBuilder: (context, index) {
-              return Container(
-                color: Colors.black12,
-                margin: const EdgeInsets.only(top: 5),
-                child: ListTile(
-                  leading: Text(list[index].title),
-                  subtitle: Text(list[index].comment),
-                  trailing: GestureDetector(
-                    onTap: (() => deleteTodoItem(index)),
-                    child: const Icon(Icons.remove_circle, color: Colors.red),
+              return Material(
+                child: Container(
+                  color: Colors.black12,
+                  margin: const EdgeInsets.only(top: 5),
+                  child: Material(
+                    child: ListTile(
+                      leading: Text(list[index].title),
+                      subtitle: Text(list[index].comment),
+                      trailing: GestureDetector(
+                        onTap: (() => deleteTodoItem(index)),
+                        child:
+                            const Icon(Icons.remove_circle, color: Colors.red),
+                      ),
+                    ),
                   ),
                 ),
               );
