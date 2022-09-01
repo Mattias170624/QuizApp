@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 
 class NewTodoSheet extends StatefulWidget {
@@ -32,22 +34,45 @@ class _NewTodoSheetState extends State<NewTodoSheet> {
               style: TextStyle(fontSize: 24, color: Colors.orange),
             ),
           ),
-          TextField(
-            textInputAction: TextInputAction.next,
-            decoration: const InputDecoration(labelText: "Title"),
-            controller: todoController,
-          ),
-          TextField(
-            textInputAction: TextInputAction.done,
-            decoration: const InputDecoration(labelText: "Comment"),
-            controller: commentController,
-          ),
+          Platform.isAndroid
+              ? TextField(
+                  textInputAction: TextInputAction.next,
+                  decoration: const InputDecoration(labelText: "Title"),
+                  controller: todoController,
+                )
+              : Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  child: CupertinoTextField(
+                    placeholder: 'Title',
+                    controller: todoController,
+                    textInputAction: TextInputAction.next,
+                  ),
+                ),
+          Platform.isAndroid
+              ? TextField(
+                  textInputAction: TextInputAction.done,
+                  decoration: const InputDecoration(labelText: "Comment"),
+                  controller: commentController,
+                )
+              : Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  child: CupertinoTextField(
+                    placeholder: 'Comment',
+                    controller: commentController,
+                    textInputAction: TextInputAction.done,
+                  ),
+                ),
           Container(
-            margin: const EdgeInsets.only(top: 20),
-            child: ElevatedButton(
-              onPressed: closeModalSheet,
-              child: const Text("Add Task"),
-            ),
+            margin: const EdgeInsets.only(top: 20, bottom: 20),
+            child: Platform.isAndroid
+                ? ElevatedButton(
+                    onPressed: closeModalSheet,
+                    child: const Text("Add Task"),
+                  )
+                : CupertinoButton.filled(
+                    onPressed: closeModalSheet,
+                    child: const Text("Add Task"),
+                  ),
           )
         ],
       ),
