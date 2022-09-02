@@ -19,6 +19,7 @@ class TodoList extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 5),
                   child: Material(
                     child: ListTile(
+                      tileColor: Colors.grey,
                       leading: Text(list[index].title),
                       subtitle: Text(list[index].comment),
                       trailing: GestureDetector(
